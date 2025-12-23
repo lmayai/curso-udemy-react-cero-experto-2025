@@ -129,3 +129,11 @@ Para correr un proyecto con VIte
 
 Para correr los scripts siempre es con *npm run < nombre del script >*
 
+Para los giphys
+- https://developers.giphy.com/
+
+Para practicar el fetch API
+
+### 
+
+
