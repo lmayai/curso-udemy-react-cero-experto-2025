@@ -28,10 +28,10 @@ const myStyles: CSSProperties = {
 export function MyAwesomeApp() {
     return (
         <>
-            <h1>{firstName}</h1>
+            <h1 data-testid="first-name-label">{firstName}</h1>
             <h3>{lastName}</h3>
 
-            <p>{favoriteGame.join(', ')}</p>
+            <p className="my-favorite-game">{favoriteGame.join(', ')}</p>
             <p>{isActive ? 'Está activo' : 'No está activo'}</p>
             <p
                 // style={{
