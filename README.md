@@ -112,7 +112,7 @@ TS
 Entonces usaremos REACT + TS
 
 
-## Sección 3: Refuezo JS y TS 
+# Sección 3: Refuezo JS y TS 
     npm create vite
 
 Para correr un proyecto con VIte
@@ -134,7 +134,7 @@ Para los giphys
 
 Para practicar el fetch API
 
-## Sección 4: Primeros pasos REACT
+# Sección 4: Primeros pasos REACT
 En esta sección, se abordarán los fundamentos de React y conceptos esenciales como:
 
 - Componentes
@@ -147,7 +147,7 @@ En esta sección, se abordarán los fundamentos de React y conceptos esenciales 
 
 El objetivo de esta sección es establecer una base sólida en los fundamentos de React, sobre la cual podamos continuar desarrollando.
 
-## Sección 5: Pruebas automatizadas unit testing
+# Sección 5: Pruebas automatizadas unit testing
 Temas puntuales
 En esta sección inicial de testing, aprenderemos muchas cosas útiles para nuestro camino a la hora de realizar pruebas automáticas.
 
@@ -265,4 +265,82 @@ Solo usar los snapshots solo si el componente ya no va a cambiar
 - co la tecla u se actualiza el snapshot
 - el afterEach se llama cada que termine una prueba, muyy util para limpiar el historial de llamados mock y evitar que una pruebe afecte otra
 - no siempre es necesario usar data-testid, porque vuelve muy dependiende el dom pa las pruebas. Hay otros mecanismos con screen para buscar por rol, texto o label.
+
+# Sección 6: GifExpertApp 
+En esta sección comenzaremos a trabajar de una forma estructurada React, que nos permita escalar proyectos y empezar a dejar el pensamiento de que necesitamos la separación en componentes pequeños fáciles de reutilizar y probar.
+
+Puntualmente veremos:
+- Peticiones HTTP
+- Debounce
+- Manejo de estado
+- Comunicación entre componentes
+- useEffect
+- Variables de entorno
+- Fuentes personalizadas
+La idea principal es dejar las bases de cómo podemos trabajar aplicaciones en React que nos permitan crecer y reutilizar su contenido a futuro.
+
+## App
+La app puede estar perfectamente asi
+```tsx
+export const GifsApp = () => {
+  return (
+    <>
+      <h1 className="content-center">Buscador de Gifs</h1>
+      <p>Descubre y comparte GIFS</p>
+
+      {/* Search */}
+      <div className="search-container">
+        <input type="text" placeholder="Busque gifs" />
+        <button>Buscar</button>
+      </div>
+
+      {/* Búsqueda previa */}
+      <div className="previous-searches">
+        <h2>Busquedas previas</h2>
+        <ul className="previous-searches-list">
+          <li>Goku</li>
+          <li>Saitama</li>
+          <li>Elden ring</li>
+        </ul>
+      </div>
+
+      {/* Gifs */}
+      <div className="gifs-container">
+        {
+          mockGifs.map(gif => (
+            <div key={gif.id} className="gif-card">
+              <img src={gif.url} alt={gif.title} />
+              <h3>{gif.title}</h3>
+              <p>
+                {gif.width}x{gif.height} (1.5mb)
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </>
+  )
+}
+```
+Pero esto es mejor separarlo por componentes.
+
+## Use effect
+Efectos secundarios
+
+```tsx
+useEffect(() => {
+    const timeoutId = setTimeout(() => {
+        onQuery(query)
+    }, 700)
+
+    return () => {
+        clearTimeout(timeoutId);
+    }
+}, [query, onQuery])
+```
+Aqui se explica como hacer un debounce con efectos
+
+El efecto se llama un vez hay un cambio en una de las dependecias, en ste caso es query y onQuery.
+Justo antes de ejecutar todo lo que hay dentro del efecto, se llama el metodo de retorno del efecto. Que ara este caso seria el que limpia el timeout. Entonces si no han pasado 700ms no se llamara al onQuery, porque se esta llamadao repetidamente el efecto y esto limpia el timeout.
+- Esto es un truco para hacer un debounce con efectos de react
 
