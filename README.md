@@ -344,3 +344,43 @@ El efecto se llama un vez hay un cambio en una de las dependecias, en ste caso e
 Justo antes de ejecutar todo lo que hay dentro del efecto, se llama el metodo de retorno del efecto. Que ara este caso seria el que limpia el timeout. Entonces si no han pasado 700ms no se llamara al onQuery, porque se esta llamadao repetidamente el efecto y esto limpia el timeout.
 - Esto es un truco para hacer un debounce con efectos de react
 
+## Examen
+1. En una aplicación de React, ¿cuál es la principal ventaja de organizar los componentes en carpetas basadas en funcionalidades (por ejemplo, una carpeta gifs y una shared) en lugar de tener una única carpeta global de components?
+    
+    *Mejora escalabilidad, agrupa el codigo, facilita su localizacion y reutilizacion. Lo ideal es agruparlo por modulos.*
+
+2. ¿Por qué se utiliza el hook useState para manejar datos que cambian con el tiempo (como la lista de búsquedas previas) en lugar de una variable de JavaScript normal?
+    
+    *Por useState permite que REact reaccione a los cambios y vuelva a renderizar  el component. Lo que hace es conectar la variable con el cilo de vida de renderizado de REact. Si fuera una variable normal, React no sabe qe debe dibujarla otra vez*
+
+3. ¿Cuál es el patrón de diseño principal para que un componente hijo pueda comunicar información o eventos a su componente padre (por ejemplo, notificar que se hizo clic en un término de búsqueda)?
+
+    *Es el patrón canonico de React, llamado levantar el estado (lift state up). El padre mantiene control de la logicay el hijo le da capacidad de activarla a traves de una funcion pasada por props*
+
+4. ¿Cuál es el objetivo principal de implementar un patrón "debounce" en una funcionalidad de búsqueda que se activa mientras el usuario escribe?
+
+    *Es una tecina de optimizacion para evitar multiples llamadaos al API, mejor e rendimineto y la experiencia de usuario*
+
+5. ¿Por qué es una buena práctica "mapear" o transformar la data que viene de una API externa (como Giphy) a una interfaz propia (interface Gif) en lugar de usar la respuesta cruda directamente en la aplicación?
+
+    *Porque desacopla la estructura de la api con la app. Solo se neesita el mapeo de un lugar, en vez de todas las posibles props. Este patró se llama adaptador, y hace que la app sea mpas rousta y facil de mantener. La app trabaja en u modelo de datos propios y consitentes. Se aisla de cambios externos*
+
+6. ¿Cuál es el propósito de utilizar un archivo .env para almacenar la API Key y añadirlo al .gitignore?
+
+    *POr seguridad, evita que datos sensibles o claves se expongan publicamete. Exponer claves en un repositorio externo es un riesgo de seguridad grave. .gitignore asegura que el archivo sensible permanezca local*
+
+7. Al utilizar una librería como Axios, ¿qué ventaja clave ofrece la creación de una "instancia" pre-configurada (axios.create) para una API específica?
+
+    *Permite centralizar la configuracion base, como la baseURL o parametros comunes como la api_key. Este enfoque sigue el principio DRY(Dont repeat yourself. Por tal, si se requiere cambiar eso, solo se cambia de un solo lugar.)*
+
+8.  El hook useEffect se ejecuta únicamente cuando el componente se monta por primera vez en la pantalla.
+
+    *No, este se ejecuta despues del primer renderizado, y cuando cambia alguna de las dependencias del efecto. Si el arreglo esta vacio, entonces se ejecuta una sola vez*
+
+9. Cuál es el propósito de un "input controlado" en React?
+
+    *Sincronizar el valor del campo de texto con el estado del component. Al vincular el value del input del estado y actualizarlo con OnChange, se asegura que el estado del componente y lo que ve el usuario siempre este sincronizado. Facilia manipulacion y validacion de datos.*
+
+10. ¿Por qué al crear un componente genérico como un SearchBar, es una buena práctica permitir que reciba props (como placeholder) en lugar de tener valores fijos dentro de él?
+
+    *Porque aumenta si reutilizacion. Paramatrizar atravez de props es u pilar de react. Permite que un compnente sea flexible* 
